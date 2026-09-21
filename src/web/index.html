@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ledger — Student Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="rail">
+    <div class="rail-brand">
+      <span class="rail-mark">§</span>
+      <div>
+        <div class="rail-title">Ledger</div>
+        <div class="rail-sub">Student records</div>
+      </div>
+    </div>
+
+    <nav class="rail-nav">
+      <div class="rail-nav-item active">Roll</div>
+      <div class="rail-nav-item" data-scroll="add-panel">New entry</div>
+    </nav>
+
+    <div class="rail-stats">
+      <div class="rail-stat">
+        <div class="rail-stat-value" id="stat-count">—</div>
+        <div class="rail-stat-label">students enrolled</div>
+      </div>
+      <div class="rail-stat">
+        <div class="rail-stat-value" id="stat-avg">—</div>
+        <div class="rail-stat-label">average marks</div>
+      </div>
+    </div>
+
+    <div class="rail-foot">served from a plain Java HttpServer · no framework</div>
+  </aside>
+
+  <main class="content">
+
+    <header class="content-head">
+      <h1>The Roll</h1>
+      <p>Every student currently on record, in the order they were entered.</p>
+      <input id="search" class="search" type="text" placeholder="Search by name, email, or course…" />
+    </header>
+
+    <section class="table-wrap">
+      <table class="roll">
+        <thead>
+          <tr>
+            <th class="col-id">No.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th class="col-marks">Marks</th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody id="roll-body">
+          <!-- rows injected by script.js -->
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" hidden>
+        No students match your search yet. Try a different name, or add one below.
+      </div>
+    </section>
+
+    <section class="panel" id="add-panel">
+      <h2 id="form-heading">Add a student</h2>
+      <form id="student-form" autocomplete="off">
+        <input type="hidden" id="student-id" value="" />
+
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required placeholder="e.g. Priya Sharma" />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="priya.sharma@example.com" />
+        </div>
+
+        <div class="field">
+          <label for="course">Course</label>
+          <input id="course" name="course" type="text" required placeholder="e.g. B.Tech Mechanical" />
+        </div>
+
+        <div class="field">
+          <label for="marks">Marks (out of 100)</label>
+          <input id="marks" name="marks" type="number" min="0" max="100" step="0.1" required placeholder="0.0" />
+        </div>
+
+        <div class="field-actions">
+          <button type="submit" id="submit-btn" class="btn-primary">Save student</button>
+          <button type="button" id="cancel-edit" class="btn-ghost" hidden>Cancel edit</button>
+        </div>
+      </form>
+      <p id="form-message" class="form-message" role="status"></p>
+    </section>
+
+  </main>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>
